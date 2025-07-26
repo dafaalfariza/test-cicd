@@ -1,18 +1,19 @@
 version: 0.2
 
 phases:
+  install:
+    runtime-versions:
+      docker: 20
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com
-
+      - $(aws ecr get-login --no-include-email --region ap-southeast-2)
   build:
     commands:
-      - echo Building Docker image...
+      - echo Build started on `date`
       - docker build -t myapp .
       - docker tag myapp:latest 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
-
   post_build:
     commands:
-      - echo Pushing Docker image to ECR...
+      - echo Pushing image...
       - docker push 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
