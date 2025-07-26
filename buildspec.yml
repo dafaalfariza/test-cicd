@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.10
+    commands:
+      - echo Install dependencies...
+      - pip install -r requirements.txt
+
+  build:
+    commands:
+      - echo Build finished.
+
+  post_build:
+    commands:
+      - echo Deploying to EC2...
+      - scp -i your-key.pem -o StrictHostKeyChecking=no -r * ec2-user@<EC2-IP>:/home/ec2-user/app/
