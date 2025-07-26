@@ -1,18 +1,18 @@
 version: 0.2
 
 phases:
-  install:
-    runtime-versions:
-      python: 3.10
+  pre_build:
     commands:
-      - echo Install dependencies...
-      - pip install -r requirements.txt
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com
 
   build:
     commands:
-      - echo Build finished.
+      - echo Building Docker image...
+      - docker build -t myapp .
+      - docker tag myapp:latest <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
 
   post_build:
     commands:
-      - echo Deploying to EC2...
-      - scp -i py-flask.pem -o StrictHostKeyChecking=no -r * ec2-user@3.107.179.186:/home/ec2-user/register-app/
+      - echo Pushing Docker image to ECR...
+      - docker push <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
