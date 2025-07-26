@@ -15,4 +15,4 @@ phases:
   post_build:
     commands:
       - echo Deploying to EC2...
-      - scp -i py-flask.pem -o StrictHostKeyChecking=no -r * ec2-user@3.107.179.186:/home/ec2-user/app/
+      - scp -i py-flask.pem -o StrictHostKeyChecking=no -r * ec2-user@3.107.179.186:/home/ec2-user/register-app/
