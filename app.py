@@ -9,7 +9,7 @@ app = Flask(__name__)
 # 🔹 DATABASE CONFIG
 # ===========================
 DB_CONFIG = {
-    "host": "terraform-20250726054753972000000001.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com",
+    "host": "terraform-20250726121300468100000001.cjqs0i4iie68.ap-southeast-2.rds.amazonaws.com",
     "user": "root",
     "password": "admin123#",
     "database": "sigap_db"
