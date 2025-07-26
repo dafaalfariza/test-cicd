@@ -4,15 +4,15 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com
+      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com
 
   build:
     commands:
       - echo Building Docker image...
       - docker build -t myapp .
-      - docker tag myapp:latest <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
+      - docker tag myapp:latest 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
 
   post_build:
     commands:
       - echo Pushing Docker image to ECR...
-      - docker push <your-aws-account-id>.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
+      - docker push 553424000858.dkr.ecr.ap-southeast-2.amazonaws.com/myapp:latest
